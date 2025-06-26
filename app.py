@@ -26,7 +26,7 @@ class Handle_csv:
             if not name:
                 print('Your name is required : ')
                 return
-            elif not name.isalpha():
+            elif not all(part.isalpha() for part in name.split()):
                 print('The contact’s name must be a string.')
                 return
             elif not phone:
@@ -99,6 +99,7 @@ class Handle_csv:
         self.data = []
         with open(self.outputfile , 'r') as file:
             reader = csv.reader(file)
+            next(reader)
             for read in reader:
                 self.data.append(read)
             
